@@ -19,6 +19,8 @@ sbtがインストールされていること
 ## Usage
 //Scalaインタプリタで実行した場合  
 //事前準備  
+scala -cp .\target\scala-2.11\ShellTools-assembly-1.0.jar  
+
 implicit def funcToConsumer( func : String => Unit ) = new Consumer[String](){ def accept(s: String) = func(s) }  
 val funcPrintln: Consumer[String] = (st:String) => println(st)  
 
