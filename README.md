@@ -11,11 +11,8 @@ JavaからShellで実行したコマンドの実行結果をStreamオブジェ�
 
 ## Description
 
-## Demo
-
-## VS. 
-
 ## Requirement
+sbtがインストールされていること
 
 ## Usage
 
