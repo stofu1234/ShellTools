@@ -15,6 +15,17 @@ JavaからShellで実行したコマンドの実行結果をStreamオブジェ�
 sbtがインストールされていること
 
 ## Usage
+implicit def funcToConsumer( func : String => Unit ) = new Consumer[String](){ def accept(s: String) = func(s) }  
+val funcPrintln: Consumer[String] = (st:String) => println(st)  
+
+import jp.co.stofu.ShellTools.ProcessStream  
+ProcessStream.create("cmd","/c","dir","c:\\").forEach(funcPrintln)  
+
+import jp.co.stofu.ShellTools.ShellStream  
+ShellStream.create("dir c:\\").forEach(funcPrintln)  
+
+import jp.co.stofu.ShellTools.PowerShellStream  
+PowerShellStream.create("Get-EventLog -LogName security -Newest 10").forEach(funcPrintln)  
 
 ## Install
 
