@@ -42,8 +42,6 @@ cd ShellTools
 mkdir out  
 sbt compile test:compile assembly  
 
-## Contribution
-
 ## Licence
 
 [MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
