@@ -15,15 +15,20 @@ JavaからShellで実行したコマンドの実行結果をStreamオブジェ�
 sbtがインストールされていること
 
 ## Usage
+//Scalaインタプリタで実行した場合  
+//事前準備  
 implicit def funcToConsumer( func : String => Unit ) = new Consumer[String](){ def accept(s: String) = func(s) }  
 val funcPrintln: Consumer[String] = (st:String) => println(st)  
 
+//ProcessStream  
 import jp.co.stofu.ShellTools.ProcessStream  
 ProcessStream.create("cmd","/c","dir","c:\\").forEach(funcPrintln)  
 
+//ShellStream  
 import jp.co.stofu.ShellTools.ShellStream  
 ShellStream.create("dir c:\\").forEach(funcPrintln)  
 
+//PowershellStream  
 import jp.co.stofu.ShellTools.PowerShellStream  
 PowerShellStream.create("Get-EventLog -LogName security -Newest 10").forEach(funcPrintln)  
 
