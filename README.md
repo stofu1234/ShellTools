@@ -22,7 +22,7 @@ git clone https://github.com/stofu1234/ShellTools.git
 cd ShellTools  
 
 mkdir out  
-sbt clean compile test:compile assembly  
+sbt compile test:compile assembly  
 
 ## Contribution
 
