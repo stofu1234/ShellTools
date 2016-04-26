@@ -1,5 +1,7 @@
 ShellTools
 ====
+Unix　Pipelining,Powershell Pipelining,C# LINQ,Java Stream APIって似た概念だな、相互運用できたらいいなと考えによりできた
+PipeLiningとJava StreamAPIを連携させるライブラリ（Java→pipelining）です
 
 ## Overview
 Java/他Java環境スクリプト用シェルコマンド実行StreamAPIライブラリ（マルチスレッド対応）です
