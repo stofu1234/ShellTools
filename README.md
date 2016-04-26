@@ -6,7 +6,7 @@ Java/他Java環境スクリプト用シェルコマンド実行StreamAPIライ�
 
 JavaからShellで実行したコマンドの実行結果をStreamオブジェクトとして受け取るライブラリです
 
-主にパイプライニングでデータ加工を行うようなコマンドの実行結果をJavaでシームレスに受け取ったり、
+主にパイプライニングでデータ加工を行うようなコマンドの実行結果をJavaでシームレスに受け取ったり、  
 そのコマンドをJavaのStreamAPIで置き換えたりする場合に使います。
 
 ## Description
@@ -18,11 +18,11 @@ sbtがインストールされていること
 
 ## Install
 
-git clone https://github.com/stofu1234/ShellTools.git
-cd ShellTools
+git clone https://github.com/stofu1234/ShellTools.git  
+cd ShellTools  
 
-mkdir out
-sbt clean compile test:compile assembly
+mkdir out  
+sbt clean compile test:compile assembly  
 
 ## Contribution
 
