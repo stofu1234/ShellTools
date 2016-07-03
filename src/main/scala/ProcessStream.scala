@@ -4,7 +4,7 @@ import java.util.stream.StreamSupport
 import java.util.Spliterator
 import java.util.Spliterators
 
-object CommandStream {
+object ProcessStream {
    def create(args: String*): java.util.stream.Stream[String] = {
       val pi = new ProcessIterator(args:_*)
       return StreamSupport.stream(

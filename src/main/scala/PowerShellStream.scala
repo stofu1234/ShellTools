@@ -10,6 +10,6 @@ object PowerShellStream {
       var shellCmd ="powershell.exe"
       var shellCmdExecuteSwitch = "-Command"
    
-      return CommandStream.create(shellCmd,shellCmdExecuteSwitch,("\""+cmd+"\""))
+      return ProcessStream.create(shellCmd,shellCmdExecuteSwitch,("\""+cmd+"\""))
    }
 }

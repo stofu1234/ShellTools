@@ -23,6 +23,6 @@ object ShellStream {
          case _ => {}
       }
    
-      return CommandStream.create(shellCmd,shellCmdExecuteSwitch,("\""+cmd+"\""))
+      return ProcessStream.create(shellCmd,shellCmdExecuteSwitch,("\""+cmd+"\""))
    }
 }
