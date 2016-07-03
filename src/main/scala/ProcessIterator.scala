@@ -30,7 +30,7 @@ class ProcessIterator(queueSize: Int, args: String*) extends Iterator[String] {
 
    implicit def funcToRunnable( func : () => Unit ) = new Runnable(){ def run() = func() }
 
-   val asyncBuffering = (reader: BufferedReader) => {
+   val asyncBuffering = (reader: BufferedReader,flagFunc: () => Unit) => {
          try {
             var nextLine=reader.readLine()
             isFirstRead = true
@@ -46,23 +46,20 @@ class ProcessIterator(queueSize: Int, args: String*) extends Iterator[String] {
                                   hasNextQueue.put(true)
                                  }
          }
+         flagFunc()
+         if(isOutputEnd && isErrorEnd && elementQueue.size == 0) {
+            hasNextQueue.put(false)
+         }
+         
       }
    
    //標準入力の非同期読み込み
    exec.execute(() => {
-                         asyncBuffering(br)
-                         isOutputEnd = true
-                         if(isOutputEnd && isErrorEnd && elementQueue.size == 0) {
-                            hasNextQueue.put(false)
-                         }
+                         asyncBuffering(br,() => {isOutputEnd = true})
                       })
    //標準エラーの非同期読み込み
    exec.execute(() => {
-                         asyncBuffering(er)
-                         isErrorEnd  = true
-                         if(isOutputEnd && isErrorEnd && elementQueue.size == 0) {
-                            hasNextQueue.put(false)
-                         }
+                         asyncBuffering(er,() => {isErrorEnd  = true})
                       })
 
    def this(args: String*) = this(1024,args:_*)
