@@ -15,11 +15,11 @@ class ProcessIterator(queueSize: Int, args: String*) extends Iterator[String] {
 
    val elementQueue: BlockingQueue[Any]     = new LinkedBlockingQueue[Any](queueSize)
    val hasNextQueue: BlockingQueue[Boolean] = new LinkedBlockingQueue[Boolean](queueSize)
-   val pb               = new ProcessBuilder(args.toList)
-   val process          = pb.start()
-   val br               = new BufferedReader(new InputStreamReader(process.getInputStream()))
-   val er               = new BufferedReader(new InputStreamReader(process.getErrorStream()))
-   val exec             = Executors.newFixedThreadPool(3)
+   val processBuilder   = new ProcessBuilder(args.toList)
+   val process          = processBuilder.start()
+   val inputReader      = new BufferedReader(new InputStreamReader(process.getInputStream()))
+   val errorReader      = new BufferedReader(new InputStreamReader(process.getErrorStream()))
+   val executor         = Executors.newFixedThreadPool(3)
    var isFirstRead      = false
    var isOutputEnd      = false
    var isErrorEnd       = false
@@ -54,12 +54,12 @@ class ProcessIterator(queueSize: Int, args: String*) extends Iterator[String] {
       }
    
    //標準入力の非同期読み込み
-   exec.execute(() => {
-                         asyncBuffering(br,() => {isOutputEnd = true})
+   executor.execute(() => {
+                         asyncBuffering(inputReader,() => {isOutputEnd = true})
                       })
    //標準エラーの非同期読み込み
-   exec.execute(() => {
-                         asyncBuffering(er,() => {isErrorEnd  = true})
+   executor.execute(() => {
+                         asyncBuffering(errorReader,() => {isErrorEnd  = true})
                       })
 
    def this(args: String*) = this(1024,args:_*)
