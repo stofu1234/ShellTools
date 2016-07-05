@@ -22,8 +22,8 @@ sbtがインストールされていること
 scala -cp .\target\scala-2.11\ShellTools-assembly-1.0.jar  
 
 import java.util.function.Consumer  
-implicit def funcToConsumer( func : String => Unit ) = new Consumer[String](){ def accept(s: String) = func(s) }  
-val funcPrintln: Consumer[String] = (st:String) => println(st)  
+implicit def funcToConsumer( func : String => Unit ) = new Consumer`[String`](){ def accept(s: String) = func(s) }  
+val funcPrintln: Consumer`[String`] = (st:String) => println(st)  
 
 //ProcessStream  
 import jp.co.stofu.ShellTools.ProcessStream  
